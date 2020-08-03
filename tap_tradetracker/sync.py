@@ -164,7 +164,11 @@ def sync_endpoint(
         if stream_name == 'campaigns':
             data = client.get_campaigns()
         elif stream_name == 'campaign_report':
-            result = client.get_report_campaign(parent_id, date_from=start_window.date(), date_to=(end_window - timedelta(days=1)).date())
+            date_from = start_window.date()
+            date_to = (end_window - timedelta(days=1)).date()
+            if date_to < date_from:
+                date_to = date_from
+            result = client.get_report_campaign(parent_id, date_from=date_from, date_to=date_to)
             data.append(result)
         else:
             raise Exception(f'Not supported stream: {stream_name}')
