@@ -16,7 +16,8 @@
             "type": "integer"
         },
         "impression_commission": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "overall_click_count": {
             "type": "integer"
@@ -31,40 +32,51 @@
             "type": "integer"
         },
         "lead_commission": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "sale_count": {
             "type": "integer"
         },
         "sale_commission": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "fixed_commission": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "CTR": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "CLR": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "CSR": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "CPO": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "ecpm": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "ecpc": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "order_amount": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         },
         "total_commission": {
-            "type": "number"
+            "type": "number",
+            "multipleOf": 0.000000001
         }
     }
 }
