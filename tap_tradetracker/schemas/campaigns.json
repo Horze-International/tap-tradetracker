@@ -1,0 +1,77 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "ID": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "name": {
+            "type": "string"
+        },
+        "URL": {
+            "type": "string"
+        },
+        "info": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "category": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "ID": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "campaign_description": {
+                    "type": "string"
+                },
+                "shop_description": {
+                    "type": ["null","string"]
+                },
+                "target_group": {
+                    "type": ["null","string"]
+                },
+                "characteristics": {
+                    "type": ["null","string"]
+                },
+                "start_date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "stop_date": {
+                    "type": ["null","string"],
+                    "format": "date"
+                },
+                "time_zone": {
+                    "type": "string"
+                },
+                "click_to_conversion": {
+                    "type": "string"
+                },
+                "policy_search_engine_marketing_status": {
+                    "type": "string",
+                    "enum": ["allowed","limited","disallowed"]
+                },
+                "policy_email_marketing_status":{
+                    "type": "string",
+                    "enum": ["allowed","limited","disallowed"]
+                },
+                "policy_cashback_status": {
+                    "type": "string",
+                    "enum": ["allowed","limited","disallowed"]
+                },
+                "policy_discount_code_status": {
+                    "type": "string",
+                    "enum": ["allowed","limited","disallowed"]
+                }
+            }
+        }
+    }
+}

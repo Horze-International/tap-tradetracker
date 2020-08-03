@@ -1,0 +1,70 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "campaign_id": {
+            "type": "integer"
+        },
+        "date": {
+            "type": "string",
+            "format": "date"
+        },
+        "overall_impression_count": {
+            "type": "integer"
+        },
+        "unique_impression_count": {
+            "type": "integer"
+        },
+        "impression_commission": {
+            "type": "number"
+        },
+        "overall_click_count": {
+            "type": "integer"
+        },
+        "unique_click_count": {
+            "type": "integer"
+        },
+        "click_commission": {
+            "type": "integer"
+        },
+        "lead_count": {
+            "type": "integer"
+        },
+        "lead_commission": {
+            "type": "number"
+        },
+        "sale_count": {
+            "type": "integer"
+        },
+        "sale_commission": {
+            "type": "number"
+        },
+        "fixed_commission": {
+            "type": "number"
+        },
+        "CTR": {
+            "type": "number"
+        },
+        "CLR": {
+            "type": "number"
+        },
+        "CSR": {
+            "type": "number"
+        },
+        "CPO": {
+            "type": "number"
+        },
+        "ecpm": {
+            "type": "number"
+        },
+        "ecpc": {
+            "type": "number"
+        },
+        "order_amount": {
+            "type": "number"
+        },
+        "total_commission": {
+            "type": "number"
+        }
+    }
+}
