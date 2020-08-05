@@ -226,7 +226,7 @@ def sync_endpoint(
                         record[parent] = parent_id
 
                     if stream_name.endswith('_report'):
-                        if start_window == end_window - timedelta(days=1):
+                        if start_window == end_window - timedelta(days=1) or start_window == end_window:
                             record['date'] = start_window.strftime('%Y-%m-%d')
                         else:
                             record['start_date'] = start_window.strftime('%Y-%m-%d')
