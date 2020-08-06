@@ -71,7 +71,7 @@
             "multipleOf": 0.000000001
         },
         "order_amount": {
-            "type": "number",
+            "type": ["null","number"],
             "multipleOf": 0.000000001
         },
         "total_commission": {
