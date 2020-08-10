@@ -87,6 +87,7 @@ def write_bookmark(state, stream, value, bookmark_field=None, parent_id=None):
     singer.write_state(state)
 
 def transform_pre_hook(data, typ, schema):
+    """A transformer hook to round numbers to their specified decimal places in the schema"""
     if typ == 'number':
         if schema.get('multipleOf'):
             max_decimal_palces = len(str(schema.get('multipleOf')))-2
@@ -226,7 +227,7 @@ def sync_endpoint(
                         record[parent] = parent_id
 
                     if stream_name.endswith('_report'):
-                        if start_window == end_window - timedelta(days=1) or start_window == end_window:
+                        if date_window_size == 1:
                             record['date'] = start_window.strftime('%Y-%m-%d')
                         else:
                             record['start_date'] = start_window.strftime('%Y-%m-%d')
