@@ -25,6 +25,12 @@ STREAMS = {
                 'replication_keys': ['date'],
                 'date_window_size': 1,
                 'parent': 'campaign_id'
+            },
+            # Reference: https://merchant.tradetracker.com/webService/index/method/getAffiliateSites
+            'affiliate_sites': {
+                'key_properties': ['ID'],
+                'replication_method': 'FULL_TABLE',
+                'parent': 'campaign_id'
             }
         }
     }

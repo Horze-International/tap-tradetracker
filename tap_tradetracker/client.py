@@ -102,6 +102,15 @@ class TradeTrackerClient:
             result.append(sobject_to_dict(campaign))
         return result
 
+    def get_affiliate_sites(self, campaign_id) -> [dict]:
+        filter_options = self.__client.factory.create('AffiliateSiteFilter')
+        affiliate_sites = self.__client.service.getAffiliateSites(campaign_id, filter_options)
+        result = []
+        for i in range(0, len(affiliate_sites)):
+            affiliate_site = affiliate_sites[i]
+            result.append(sobject_to_dict(affiliate_site))
+        return result
+
     def get_report_campaign(self, campaign_id, date_from, date_to) -> dict:
         filter_options = self.__client.factory.create('ReportCampaignFilter')
         LOGGER.info(f'date_from={date_from} date_to={date_to}')

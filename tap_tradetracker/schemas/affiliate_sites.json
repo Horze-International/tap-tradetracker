@@ -1,0 +1,82 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "campaign_id": {
+            "type": "integer"
+        },
+        "ID": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "name": {
+            "type": "string"
+        },
+        "URL": {
+            "type": "string"
+        },
+        "info": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "ID": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "category": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "ID": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": {
+                    "type": ["null","string"]
+                },
+                "assignment_status": {
+                    "type": ["string"],
+                    "enum": ["pending","accepted","rejected","onhold","signedout"]
+                },
+                "campaign_segment": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "ID": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "assignment_date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modification_date": {
+                    "type": ["null","string"],
+                    "format": "date-time"
+                },
+                "trade_rules_enabled": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

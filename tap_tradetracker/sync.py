@@ -1,5 +1,5 @@
 import math
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,timezone
 import humps
 
 import singer
@@ -95,6 +95,10 @@ def transform_pre_hook(data, typ, schema):
                 max_decimal_palces = 0
             if isinstance(data, float):
                 return round(data, max_decimal_palces)
+    if typ == 'string' and schema.get('format') == 'date-time':
+        if data: # ignore 'None'
+            dt = datetime.strptime(data, '%Y-%m-%dT%H:%M:%S%z').astimezone(timezone.utc)
+            return dt.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     return data
 
@@ -201,6 +205,8 @@ def sync_endpoint(
                 date_to = date_from
             result = client.get_report_campaign(parent_id, date_from=date_from, date_to=date_to)
             data.append(result)
+        elif stream_name == 'affiliate_sites':
+            data = client.get_affiliate_sites(campaign_id=parent_id)
         else:
             raise Exception(f'Not supported stream: {stream_name}')
 
