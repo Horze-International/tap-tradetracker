@@ -30,23 +30,16 @@ def main():
     if parsed_args.config:
         config = parsed_args.config
 
-    with TradeTrackerClient(config['customer_id'],
-                            config['passphrase'],
-                            sandbox=config.get('sandbox',False),
-                            locale=config.get('locale',None),
-                            demo=config.get('demo',False)) as client:
+    state = {}
+    if parsed_args.state:
+        state = parsed_args.state
 
-        state = {}
-        if parsed_args.state:
-            state = parsed_args.state
-
-        if parsed_args.discover:
-            do_discover()
-        elif parsed_args.catalog:
-            sync(client=client,
-                 config=config,
-                 catalog=parsed_args.catalog,
-                 state=state)
+    if parsed_args.discover:
+        do_discover()
+    elif parsed_args.catalog:
+        sync(config=config,
+            catalog=parsed_args.catalog,
+            state=state)
 
 if __name__ == '__main__':
     main()

@@ -337,7 +337,7 @@ def update_currently_syncing(state, stream_name):
         singer.set_currently_syncing(state, stream_name)
     singer.write_state(state)
 
-def sync(client, config, catalog, state):
+def sync(config, catalog, state):
     # Get selected_streams from catalog, based on state last_stream
     #   last_stream = Previous currently synced stream, if the load was interrupted
     last_stream = singer.get_currently_syncing(state)
@@ -366,35 +366,42 @@ def sync(client, config, catalog, state):
                 sync_streams.append(parent_stream)
     LOGGER.info('Sync Streams: {}'.format(sync_streams))
 
-    LOGGER.info('Initializing TradeTrackerClient client - Loading WSDL')
-    with TradeTrackerClient(customer_id=config['customer_id'],
-                                passphrase=config['passphrase'],
+    i = 0
+    passphrases = config['passphrase']
+    if not isinstance(passphrases, list):
+        passphrases = [passphrases]
+    for passphrase in passphrases:
+        i += 1
+        LOGGER.info(f'Start sync. country no. {i}/{len(passphrases)}')
+        LOGGER.info('Initializing TradeTrackerClient client - Loading WSDL')
+        with TradeTrackerClient(customer_id=config['customer_id'],
+                                passphrase=passphrase,
                                 sandbox=config.get('sandbox', False),
                                 locale=config.get('locale'),
                                 demo=config.get('demo', False)) as client:
 
-        LOGGER.info('Authenticate against API')
-        client.authenticate()
+            LOGGER.info('Authenticate against API')
+            client.authenticate()
 
-        # Loop through selected_streams
-        # Loop through endpoints in selected_streams
-        for stream_name, endpoint_config in STREAMS.items():
-            if stream_name in sync_streams:
-                LOGGER.info('START Syncing: {}'.format(stream_name))
-                write_schema(catalog, stream_name)
-                update_currently_syncing(state, stream_name)
+            # Loop through selected_streams
+            # Loop through endpoints in selected_streams
+            for stream_name, endpoint_config in STREAMS.items():
+                if stream_name in sync_streams:
+                    LOGGER.info('START Syncing: {}'.format(stream_name))
+                    write_schema(catalog, stream_name)
+                    update_currently_syncing(state, stream_name)
 
-                total_records = sync_endpoint(
-                    client=client,
-                    config=config,
-                    catalog=catalog,
-                    state=state,
-                    stream_name=stream_name,
-                    endpoint_config=endpoint_config,
-                    sync_streams=sync_streams,
-                    selected_streams=selected_streams)
+                    total_records = sync_endpoint(
+                        client=client,
+                        config=config,
+                        catalog=catalog,
+                        state=state,
+                        stream_name=stream_name,
+                        endpoint_config=endpoint_config,
+                        sync_streams=sync_streams,
+                        selected_streams=selected_streams)
 
-                update_currently_syncing(state, None)
-                LOGGER.info('FINISHED Syncing: {}, total_records: {}'.format(
-                    stream_name,
-                    total_records))
+                    update_currently_syncing(state, None)
+                    LOGGER.info('FINISHED Syncing: {}, total_records: {}'.format(
+                        stream_name,
+                        total_records))

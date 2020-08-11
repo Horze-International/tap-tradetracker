@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(name='tap-tradetracker',
-      version="0.1.5",
+      version="0.2.0",
       description='Singer.io tap for extracting data from the TradeTracker.com Web Service (SOAP API)',
       author='Horze',
       url='http://horze.de',

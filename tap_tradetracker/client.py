@@ -89,10 +89,10 @@ class TradeTrackerClient:
 
     def authenticate(self):
         self.__client.service.authenticate(customerID=self.__customer_id,
-                                            passphrase=self.__passphrase,
-                                            sandbox=self.sandbox,
-                                            locale=self.locale,
-                                            demo=self.demo)
+                                           passphrase=self.__passphrase,
+                                           sandbox=self.sandbox,
+                                           locale=self.locale,
+                                           demo=self.demo)
 
     def get_campaigns(self) -> [dict]:
         campaigns = self.__client.service.getCampaigns()
